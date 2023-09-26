@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 canvas {
@@ -12,7 +13,17 @@ canvas {
   border-image-repeat: round;
   background-color: rgba(255, 255, 240);
 
+
 }
+
+.canvas2 {
+  cursor: url('./pictures/borrador.png'), alias;
+  /*  cursor: url('x-CollaborativeDrawingCanvas/pictures/borrador.png'), alias; */
+
+
+}
+
+
 
 .divTools {
   box-sizing: border-box;
@@ -58,6 +69,14 @@ canvas {
   background: linear-gradient(to right, salmon 50%, blue 50%);
 }
 
+.eraser-selected {
+
+
+  color: rgb(255, 255, 255);
+
+  cursor: url('./pictures/borrador.png'), auto;
+
+}
 
 .btn {
   cursor: pointer;

@@ -12,7 +12,7 @@ const wss = new WebSocket.Server({ server });
 // Objeto para mantener un seguimiento de las sesiones de dibujo
 const drawingSessions = {};
 
-const strokeHistory = [];
+let strokeHistory = [];
 
 wss.on("connection", (ws) => {
   // Enviar historial de trazos al nuevo usuario
@@ -21,8 +21,18 @@ wss.on("connection", (ws) => {
   ws.on("message", (message) => {
     const data = JSON.parse(message);
 
-    // Al recibir un nuevo trazo, agregarlo al historial y enviarlo a todos los usuarios
-    if (data.type === "draw") {
+    // Verifica si el mensaje es de tipo "deleteSession"
+    if (data.type === "deleteSession") {
+      strokeHistory = [];
+      console.log("Delete History strokes");
+      /*    const sessionKey = data.data.session;
+
+      if (drawingSessions[sessionKey]) {
+        delete drawingSessions[sessionKey];
+      } */
+    } else if (data.type === "draw") {
+      // Al recibir un nuevo trazo, agregarlo al historial y enviarlo a todos los usuarios
+
       strokeHistory.push(data.data);
       wss.clients.forEach((client) => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
