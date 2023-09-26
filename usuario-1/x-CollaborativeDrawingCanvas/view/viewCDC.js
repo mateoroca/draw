@@ -45,7 +45,7 @@ class ViewCDC extends HTMLElement {
     // Crea un párrafo dentro del botón para el texto "Delete"
     this.paragraph = document.createElement("p");
     this.paragraph.classList.add("paragraph");
-    this.paragraph.textContent = "Delete Draw Session";
+    this.paragraph.textContent = "Delete History Strokes";
 
     // Crea un contenedor para el icono
     this.iconWrapper = document.createElement("span");

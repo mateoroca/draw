@@ -23,6 +23,8 @@ class ControlllerCDC {
       // Configurar el modo de composición para borrar
       this.ctx.globalCompositeOperation = "destination-out";
       this.localState.strokeColor = " rgb(255, 255, 240)";
+
+      /*  this.view.canvas.classList.add("canvas2"); */
     });
     /* --------------------------------------------------------------------------------- */
     this.view.colorPalette.addEventListener("input", (event) => {
@@ -40,7 +42,9 @@ class ControlllerCDC {
     });
     /* --------------------------------------------------------------------------------- */
 
-    this.view.deleteSessionButton.addEventListener("click");
+    this.view.deleteSessionButton.addEventListener("click", () => {
+      this.__deleteHistoryStrokes();
+    });
     /* --------------------------------------------------------------------------------- */
     this.isDrawing = false;
     this.lastX = 0;
@@ -63,6 +67,17 @@ class ControlllerCDC {
       const data = JSON.parse(event.data);
       this.__handleJsonData(data);
     }
+  }
+
+  __deleteHistoryStrokes() {
+    const message = {
+      type: "deleteSession",
+      data: {
+        session: "session1",
+      },
+    };
+
+    this.socket.send(JSON.stringify(message));
   }
 
   __processBlobData(blob) {
