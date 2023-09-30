@@ -1,9 +1,12 @@
 const WebSocket = require("ws");
 const http = require("http");
 const express = require("express");
+const { dirname } = require("path");
 const app = express();
+const cors = require("cors");
 
 // Configura el servidor HTTP
+app.use(cors());
 const server = http.createServer(app);
 
 // Configura el servidor WebSocket
@@ -25,15 +28,16 @@ wss.on("connection", (ws) => {
     if (data.type === "deleteSession") {
       strokeHistory = [];
       console.log("Delete History strokes");
-      /*    const sessionKey = data.data.session;
+      const sessionKey = data.data.session;
 
       if (drawingSessions[sessionKey]) {
         delete drawingSessions[sessionKey];
-      } */
+      }
     } else if (data.type === "draw") {
       // Al recibir un nuevo trazo, agregarlo al historial y enviarlo a todos los usuarios
 
       strokeHistory.push(data.data);
+
       wss.clients.forEach((client) => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
           client.send(JSON.stringify({ type: "draw", data: data.data }));
@@ -80,7 +84,8 @@ wss.on("connection", (ws, req) => {
 });
 
 // Configura el servidor web para servir una página HTML
-app.use(express.static(__dirname + "/public"));
+
+app.use(express.static(__dirname + "/public/"));
 
 // Inicia el servidor en el puerto 3000
 const PORT = process.env.PORT || 3000;
