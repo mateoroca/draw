@@ -17,6 +17,13 @@ const drawingSessions = {};
 
 let strokeHistory = [];
 
+wss.on("connection", (ws, req) => {
+  // Obtiene la dirección IP del cliente desde la solicitud HTTP
+  const clientIp = req.socket.remoteAddress;
+
+  console.log(clientIp);
+});
+
 wss.on("connection", (ws) => {
   // Enviar historial de trazos al nuevo usuario
   ws.send(JSON.stringify({ type: "history", data: strokeHistory }));

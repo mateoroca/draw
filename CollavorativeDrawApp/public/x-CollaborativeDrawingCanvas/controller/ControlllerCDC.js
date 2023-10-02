@@ -13,10 +13,19 @@ class ControlllerCDC {
     /* --------------------------------------------------------------------------------- */
     this.view.canvas.addEventListener(
       "touchstart",
-      this.startDrawing.bind(this)
+      this.startDrawing.bind(this),
+      { passive: true } // Marcar como passive
     );
-    this.view.canvas.addEventListener("touchmove", this.draw.bind(this));
-    this.view.canvas.addEventListener("touchend", this.stopDrawing.bind(this));
+    this.view.canvas.addEventListener(
+      "touchmove",
+      this.draw.bind(this),
+      { passive: true } // Marcar como passive
+    );
+    this.view.canvas.addEventListener(
+      "touchend",
+      this.stopDrawing.bind(this),
+      { passive: true } // Marcar como passive
+    );
 
     /* --------------------------------------------------------------------------------- */
     this.ctx = this.view.getCanvasContext();
@@ -24,7 +33,7 @@ class ControlllerCDC {
 
     /* --------------------------------------------------------------------------------- */
     this.socket.onmessage = (event) => {
-      console.log(event);
+      /*  console.log(event); */
       this.handleWebSocketMessage(event);
     };
     /* --------------------------------------------------------------------------------- */
