@@ -14,18 +14,14 @@ class ControlllerCDC {
     this.view.canvas.addEventListener(
       "touchstart",
       this.startDrawing.bind(this),
-      { passive: true } // Marcar como passive
+      { passive: true }
     );
-    this.view.canvas.addEventListener(
-      "touchmove",
-      this.draw.bind(this),
-      { passive: true } // Marcar como passive
-    );
-    this.view.canvas.addEventListener(
-      "touchend",
-      this.stopDrawing.bind(this),
-      { passive: true } // Marcar como passive
-    );
+    this.view.canvas.addEventListener("touchmove", this.draw.bind(this), {
+      passive: true,
+    });
+    this.view.canvas.addEventListener("touchend", this.stopDrawing.bind(this), {
+      passive: true,
+    });
 
     /* --------------------------------------------------------------------------------- */
     this.ctx = this.view.getCanvasContext();
@@ -38,9 +34,8 @@ class ControlllerCDC {
     };
     /* --------------------------------------------------------------------------------- */
     this.view.eraseButton.addEventListener("click", () => {
-      // Configurar el color de trazo en blanco
       this.ctx.strokeStyle = " rgb(255, 255, 240)";
-      // Configurar el modo de composición para borrar
+
       this.ctx.globalCompositeOperation = "destination-out";
       this.localState.strokeColor = " rgb(255, 255, 240)";
 
@@ -48,9 +43,8 @@ class ControlllerCDC {
     });
     /* --------------------------------------------------------------------------------- */
     this.view.colorPalette.addEventListener("input", (event) => {
-      // Configurar el color de trazo en el color seleccionado
       this.ctx.strokeStyle = event.target.value;
-      // Restablecer el modo de composición para dibujar normalmente
+
       this.ctx.globalCompositeOperation = "source-over";
       this.localState.strokeColor = event.target.value;
     });
@@ -58,7 +52,6 @@ class ControlllerCDC {
     this.view.strokeWidthInput.addEventListener("input", (event) => {
       this.ctx.lineWidth = event.target.value;
       this.localState.strokeWidth = event.target.value;
-      // Configura el grosor del trazo en función del valor del input
     });
     /* --------------------------------------------------------------------------------- */
 
@@ -166,3 +159,5 @@ class ControlllerCDC {
 }
 
 export { ControlllerCDC };
+
+//Made by Mateo Roca
