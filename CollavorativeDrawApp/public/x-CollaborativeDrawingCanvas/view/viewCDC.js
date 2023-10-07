@@ -1,3 +1,9 @@
+/* Copyright Mateo Jose Roca Clementis <mateojoserocaclemntis17@gmail.com>
+ Released under the MIT license
+https://opensource.org/licenses/MIT
+
+ */
+
 class ViewCDC extends HTMLElement {
   constructor() {
     super();

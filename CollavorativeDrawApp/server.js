@@ -1,3 +1,9 @@
+/* Copyright Mateo Jose Roca Clementis <mateojoserocaclemntis17@gmail.com>
+ Released under the MIT license
+https://opensource.org/licenses/MIT
+
+ */
+
 const WebSocket = require("ws");
 const http = require("http");
 const express = require("express");
